@@ -24,7 +24,7 @@ struct ContentView: View {
                     Image(uiImage: selectedImage)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .clipShape(Circle())
+                       
                         .frame(width: 300, height: 300)
 
                 } else{
