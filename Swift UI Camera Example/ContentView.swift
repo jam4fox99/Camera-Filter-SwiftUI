@@ -106,6 +106,20 @@ struct ContentView: View {
                         }
                         
                     }
+                    Button("Blur"){
+                        if let inputImage = selectedImage{
+                            let beginImage = CIImage(image: inputImage)
+                            let currentFilter = CIFilter.gaussianBlur()
+                            currentFilter.inputImage = beginImage
+                            currentFilter.radius = 10
+
+                            guard let outputImage = currentFilter.outputImage else { return }
+                            if let cgImage = context.createCGImage(outputImage, from: outputImage.extent){
+                                let uiImage = UIImage(cgImage: cgImage)
+                                self.selectedImage = uiImage
+                            }
+                        }
+                    }
                 }.sheet(isPresented: self.$displayPickerView) {
                     ImagePickerView(selectedImage: self.$selectedImage, sourceType: self.sourceType)
                 }
